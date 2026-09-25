@@ -1,3 +1,4 @@
+import WorkOutDetailsPage from '@/app/workout/[workoutId]/page';
 import { ILibrary } from '@/type/library.type';
 import React from 'react';
 
@@ -16,9 +17,14 @@ const Libraries = async() => {
         <div className="container mx-auto px-4 py-10">
             <h2 className='text-3xl font-bold'>The Library</h2>
             <p>Twelve lifts covering every major muscle group.</p>
-            <div>
+            <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {
-                    librariesData.map((library: ILibrary) => <li key={library.id}>{library.name}</li>)
+                    librariesData.map((library: ILibrary) => (
+                        <WorkOutDetailsPage
+                            key={library.id}
+                            params={Promise.resolve({ workoutId: String(library.id) })}
+                        />
+                    ))
                 }
             </div>
         </div>
