@@ -302,7 +302,6 @@ const WorkOutDetailsPage = async ({
 
                             <AddToPlanButton workout={workout}></AddToPlanButton>
                             <SaveLetterButton workout={workout}></SaveLetterButton>
-                            
 
                         </div>
 
