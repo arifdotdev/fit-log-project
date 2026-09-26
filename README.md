@@ -66,25 +66,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | `npm run start` | Run the production build         |
 | `npm run lint`  | Lint the project with ESLint     |
 
-## 📁 Project Structure
-
-```
-src/
-├── app/
-│   ├── page.tsx                 # Home page (banner + library)
-│   ├── my-plan/page.tsx         # Today's plan & saved workouts
-│   └── workout/[workoutId]/     # Workout details page
-├── components/
-│   ├── homePage/                # Banner, Libraries
-│   ├── myPlan/                  # PlanStats, PlanWorkoutCard, EmptyPlan
-│   ├── shared/                  # WorkOutCard
-│   ├── workoutButton/           # AddToPlanButton, SaveLetterButton
-│   ├── NavBar.tsx
-│   └── Footer.tsx
-├── context/WorkOutContext.tsx   # Plan / saved state + localStorage sync
-└── type/library.type.ts         # ILibrary interface
-```
-
 ## 📄 License
 
 This project is for learning and personal use.
