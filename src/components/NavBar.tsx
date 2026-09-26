@@ -113,19 +113,26 @@ const NavBar = () => {
                     <div className="navbar-end">
                         <div className="flex items-center gap-6 text-sm">
 
-                            <div className="flex items-center gap-2">
+                            {/* Both counters link to the My Plan page; Saved opens the Saved tab */}
+                            <Link
+                                href="/my-plan"
+                                className="flex items-center gap-2 transition hover:opacity-100"
+                            >
                                 <span className="opacity-80">Plan</span>
                                 <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-[#C2F800] px-1 text-xs font-bold text-[#1A2312]">
                                     {planCount}
                                 </span>
-                            </div>
+                            </Link>
 
-                            <div className="flex items-center gap-2">
+                            <Link
+                                href="/my-plan?tab=saved"
+                                className="flex items-center gap-2 transition hover:opacity-100"
+                            >
                                 <span className="opacity-80">Saved</span>
                                 <span className="flex h-5 min-w-5 items-center justify-center rounded-full border border-base-300 px-1 text-xs">
                                     {savedCount}
                                 </span>
-                            </div>
+                            </Link>
 
                         </div>
                     </div>

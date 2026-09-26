@@ -5,7 +5,8 @@ import PlanStats from '@/components/myPlan/PlanStats';
 import PlanWorkoutCard from '@/components/myPlan/PlanWorkoutCard';
 import { WorkoutContext } from '@/context/WorkOutContext';
 import { ILibrary } from '@/type/library.type';
-import React, { useContext, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import React, { Suspense, useContext, useEffect, useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
@@ -26,7 +27,17 @@ const MyPlanPage = () => {
         isLoading,
     } = workoutContext;
 
-    const [activeTab, setActiveTab] = useState<'plan' | 'saved'>('plan');
+    // Start on the Saved tab when the URL is /my-plan?tab=saved (used by the navbar link)
+    const searchParams = useSearchParams();
+    const startTab = searchParams.get('tab') === 'saved' ? 'saved' : 'plan';
+
+    const [activeTab, setActiveTab] = useState<'plan' | 'saved'>(startTab);
+
+    // If the URL changes while already on this page (e.g. clicking "Saved" in the navbar),
+    // switch the tab to match it
+    useEffect(() => {
+        setActiveTab(startTab);
+    }, [startTab]);
     const [sortBy, setSortBy] = useState<SortOption>('duration');
 
     const handleMarkAsDone = (workout: ILibrary) => {
@@ -173,4 +184,11 @@ const MyPlanPage = () => {
     );
 };
 
-export default MyPlanPage;
+// useSearchParams needs a Suspense boundary around it in Next.js
+const MyPlanPageWithSuspense = () => (
+    <Suspense>
+        <MyPlanPage />
+    </Suspense>
+);
+
+export default MyPlanPageWithSuspense;
