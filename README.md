@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+<img src="src/assets/logo.png" alt="FitLog logo" width="90" />
 
-First, run the development server:
+# FitLog
+
+**Browse a curated workout library, build today's plan, and track what you finish.**
+
+![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-19-20232A?logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
+![daisyUI](https://img.shields.io/badge/daisyUI-5-5A0EF8?logo=daisyui&logoColor=white)
+
+</div>
+
+---
+
+## 📖 About
+
+FitLog is a simple, fast fitness planner built with Next.js. It pulls a library of twelve lifts covering every major muscle group, lets you open each one for full details, and helps you organize your day with a five-lift plan and a "save for later" list. Everything you add is stored in your browser, so your plan is still there when you come back.
+
+## 🛠️ Technologies Used
+
+| Category   | Technology                                      |
+| ---------- | ----------------------------------------------- |
+| Framework  | [Next.js 16](https://nextjs.org) (App Router)   |
+| UI Library | [React 19](https://react.dev)                   |
+| Language   | [TypeScript](https://www.typescriptlang.org)    |
+| Styling    | [Tailwind CSS 4](https://tailwindcss.com) + [daisyUI](https://daisyui.com) |
+| Icons      | [React Icons](https://react-icons.github.io/react-icons) |
+| Notifications | [React Toastify](https://fkhadra.github.io/react-toastify) |
+| State      | React Context API + `localStorage`              |
+| Data       | REST API (`api.abcz.workers.dev/api/fitlog`)    |
+
+## ✨ Key Features
+
+1. **Workout Library** – Browse twelve lifts fetched from a live API, each shown as a card with image, muscle groups, and quick stats.
+2. **Workout Details Page** – Open any lift to see equipment, difficulty, sets, reps, duration, calories, rating, and step-by-step instructions.
+3. **Today's Plan (5-lift cap)** – Add workouts to a daily plan limited to five lifts. Mark a lift as done to clear it and make room for the next one.
+4. **Save for Later** – Bookmark workouts you want to try another day and switch between the *Plan* and *Saved* tabs on the My Plan page.
+5. **Plan Stats & Sorting** – See total exercises, minutes, and calories at a glance, and sort your list by duration, calories, or rating. Toast messages confirm every action, and everything persists in `localStorage`.
+
+## 🚀 Getting Started
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/<your-username>/fit-log.git
+cd fit-log
+
+# 2. Install dependencies
+npm install
+
+# 3. Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command         | Description                      |
+| --------------- | -------------------------------- |
+| `npm run dev`   | Start the development server     |
+| `npm run build` | Create a production build        |
+| `npm run start` | Run the production build         |
+| `npm run lint`  | Lint the project with ESLint     |
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── page.tsx                 # Home page (banner + library)
+│   ├── my-plan/page.tsx         # Today's plan & saved workouts
+│   └── workout/[workoutId]/     # Workout details page
+├── components/
+│   ├── homePage/                # Banner, Libraries
+│   ├── myPlan/                  # PlanStats, PlanWorkoutCard, EmptyPlan
+│   ├── shared/                  # WorkOutCard
+│   ├── workoutButton/           # AddToPlanButton, SaveLetterButton
+│   ├── NavBar.tsx
+│   └── Footer.tsx
+├── context/WorkOutContext.tsx   # Plan / saved state + localStorage sync
+└── type/library.type.ts         # ILibrary interface
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is for learning and personal use.
