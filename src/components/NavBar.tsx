@@ -105,26 +105,24 @@ const NavBar = () => {
                     </div>
 
                     <div className="navbar-end">
-                        <div className="flex items-center gap-6 text-sm">
+                        <div className="flex items-center gap-2">
 
+                            {/* Plan badge: filled pill with accent background */}
                             <Link
                                 href="/my-plan"
-                                className="flex items-center gap-2 transition hover:opacity-100"
+                                className="inline-flex items-center gap-1.5 rounded-full bg-[#C2F800] px-3 py-1 text-xs font-semibold text-[#1A2312] transition hover:brightness-95"
                             >
-                                <span className="opacity-80">Plan</span>
-                                <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-[#C2F800] px-1 text-xs font-bold text-[#1A2312]">
-                                    {planCount}
-                                </span>
+                                <span>Plan</span>
+                                <span className="font-bold">{planCount}</span>
                             </Link>
 
+                            {/* Saved badge: outline pill */}
                             <Link
                                 href="/my-plan?tab=saved"
-                                className="flex items-center gap-2 transition hover:opacity-100"
+                                className="inline-flex items-center gap-1.5 rounded-full border border-base-content/30 px-3 py-1 text-xs font-semibold transition hover:border-base-content/60"
                             >
-                                <span className="opacity-80">Saved</span>
-                                <span className="flex h-5 min-w-5 items-center justify-center rounded-full border border-base-300 px-1 text-xs">
-                                    {savedCount}
-                                </span>
+                                <span>Saved</span>
+                                <span className="font-bold">{savedCount}</span>
                             </Link>
 
                         </div>

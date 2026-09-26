@@ -1,5 +1,6 @@
 import React from 'react';
-import { ILibrary } from '@/type/library.type';
+import { notFound } from 'next/navigation';
+import { getWorkouts } from '@/lib/getWorkouts';
 import Image from 'next/image';
 import {
     FaStopwatch,
@@ -9,8 +10,6 @@ import {
     FaChartBar,
     FaLayerGroup,
     FaRepeat,
-    FaCalendarCheck,
-    FaBookmark,
 } from 'react-icons/fa6';
 import AddToPlanButton from '@/components/workoutButton/AddToPlanButton';
 import SaveLetterButton from '@/components/workoutButton/SaveLetterButton';
@@ -21,50 +20,20 @@ interface workOutDetailsPageProps {
     }>;
 }
 
-const getWorkoutDetails = async (): Promise<ILibrary[]> => {
-    const res = await fetch(
-        'https://api.abcz.workers.dev/api/fitlog',
-        {
-            cache: 'no-store',
-        }
-    );
-
-    if (!res.ok) {
-        throw new Error('Failed to fetch data');
-    }
-
-    return res.json();
-};
-
 const WorkOutDetailsPage = async ({
     params,
 }: workOutDetailsPageProps) => {
     const { workoutId } = await params;
 
-    const workoutDetails = await getWorkoutDetails();
+    const workouts = await getWorkouts();
 
-    const workout = workoutDetails.find(
-        (workout) => workout.id === parseInt(workoutId)
+    const workout = workouts.find(
+        (item) => item.id === parseInt(workoutId)
     );
 
-    console.log('Workout details:', workoutId, workout);
-
+    // Sends the user to the 404 page (src/app/not-found.tsx)
     if (!workout) {
-        return (
-            <section className="min-h-screen bg-[#0c0e11] px-4 py-10 text-white">
-                <div className="mx-auto max-w-7xl">
-                    <div className="rounded-2xl border border-[#292d35] bg-[#15171c] px-6 py-20 text-center">
-                        <h1 className="text-2xl font-bold">
-                            Workout Not Found
-                        </h1>
-
-                        <p className="mt-2 text-sm text-[#9297a2]">
-                            The workout you are looking for does not exist.
-                        </p>
-                    </div>
-                </div>
-            </section>
-        );
+        notFound();
     }
 
     return (
