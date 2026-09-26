@@ -1,21 +1,49 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import { usePathname } from 'next/navigation';
+import React, { useContext } from 'react';
 import logoImg from '@/assets/logo.png';
+import { WorkoutContext } from '@/context/WorkOutContext';
 
 const NavBar = () => {
+    const workoutContext = useContext(WorkoutContext);
+
+    if (!workoutContext) {
+        throw new Error('WorkoutContext is not available');
+    }
+
+    const { addToWorkout, saveForLater } = workoutContext;
+
+    // Live counts shown on the right side of the navbar
+    const planCount = addToWorkout.length;
+    const savedCount = saveForLater.length;
+
+    // Current URL path, used to highlight the active link
+    const pathname = usePathname();
+
+    // Workouts is active on the home page and on workout detail pages
+    const isWorkoutsActive = pathname === '/' || pathname.startsWith('/workout');
+    const isMyPlanActive = pathname.startsWith('/my-plan');
+
+    const activeClass =
+        'rounded-full bg-[#C2F800] px-4 py-2 text-sm font-medium text-[#1A2312]';
+    const inactiveClass =
+        'px-4 py-2 text-sm font-medium opacity-70 transition hover:opacity-100';
+
     const links = (
         <>
             <Link
                 href="/"
-                className="rounded-full bg-[#C2F800] px-4 py-2 text-sm font-medium text-[#1A2312]"
+                className={isWorkoutsActive ? activeClass : inactiveClass}
             >
                 Workouts
             </Link>
 
             <Link
                 href="/my-plan"
-                className="px-4 py-2 text-sm font-medium opacity-70 transition hover:opacity-100"
+                className={isMyPlanActive ? activeClass : inactiveClass}
             >
                 My Plan
             </Link>
@@ -88,14 +116,14 @@ const NavBar = () => {
                             <div className="flex items-center gap-2">
                                 <span className="opacity-80">Plan</span>
                                 <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-[#C2F800] px-1 text-xs font-bold text-[#1A2312]">
-                                    0
+                                    {planCount}
                                 </span>
                             </div>
 
                             <div className="flex items-center gap-2">
                                 <span className="opacity-80">Saved</span>
                                 <span className="flex h-5 min-w-5 items-center justify-center rounded-full border border-base-300 px-1 text-xs">
-                                    0
+                                    {savedCount}
                                 </span>
                             </div>
 

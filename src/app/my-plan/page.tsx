@@ -6,7 +6,10 @@ import PlanWorkoutCard from '@/components/myPlan/PlanWorkoutCard';
 import { WorkoutContext } from '@/context/WorkOutContext';
 import { ILibrary } from '@/type/library.type';
 import React, { useContext, useState } from 'react';
+import { FaChevronDown } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+
+type SortOption = 'duration' | 'calories' | 'rating';
 
 const MyPlanPage = () => {
     const workoutContext = useContext(WorkoutContext);
@@ -21,10 +24,10 @@ const MyPlanPage = () => {
         saveForLater,
         setSaveForLater,
         isLoading,
-        addToPlan,
     } = workoutContext;
 
     const [activeTab, setActiveTab] = useState<'plan' | 'saved'>('plan');
+    const [sortBy, setSortBy] = useState<SortOption>('duration');
 
     const handleMarkAsDone = (workout: ILibrary) => {
         setAddToWorkout((prev) =>
@@ -45,6 +48,14 @@ const MyPlanPage = () => {
     // The list shown under the active tab
     const workouts = activeTab === 'plan' ? addToWorkout : saveForLater;
 
+    // Sort a copy so the original list is not changed.
+    // Duration: shortest first. Calories & Rating: highest first.
+    const sortedWorkouts = [...workouts].sort((a, b) => {
+        if (sortBy === 'duration') return a.duration - b.duration;
+        if (sortBy === 'calories') return b.caloriesBurned - a.caloriesBurned;
+        return b.rating - a.rating;
+    });
+
     return (
         <section className="min-h-screen bg-[#0c0e11] text-white">
             <div className="container mx-auto px-4 py-10">
@@ -61,8 +72,11 @@ const MyPlanPage = () => {
                     <PlanStats workouts={workouts}></PlanStats>
                 </div>
 
+                {/* Tabs + Sort */}
+                <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+
                 {/* Tabs */}
-                <div className="mt-8 inline-flex rounded-full border border-[#292d35] bg-[#15171c] p-1">
+                <div className="inline-flex rounded-full border border-[#292d35] bg-[#15171c] p-1">
                     <button
                         type="button"
                         onClick={() => setActiveTab('plan')}
@@ -88,6 +102,29 @@ const MyPlanPage = () => {
                     </button>
                 </div>
 
+                {/* Sort Dropdown */}
+                <div className="flex items-center gap-2">
+                    <span className="text-[11px] font-bold uppercase text-[#9297a2]">
+                        Sort By
+                    </span>
+
+                    <div className="relative">
+                        <select
+                            value={sortBy}
+                            onChange={(e) => setSortBy(e.target.value as SortOption)}
+                            className="cursor-pointer appearance-none rounded-full border border-[#292d35] bg-[#15171c] py-2 pl-4 pr-9 text-[11px] font-bold text-white outline-none focus:border-[#baff00]"
+                        >
+                            <option value="duration">Duration</option>
+                            <option value="calories">Calories</option>
+                            <option value="rating">Rating</option>
+                        </select>
+
+                        <FaChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-[#9297a2]" />
+                    </div>
+                </div>
+
+                </div>
+
                 {/* Workout List */}
                 <div className="mt-5">
 
@@ -106,7 +143,7 @@ const MyPlanPage = () => {
                     {/* Today's Plan */}
                     {!isLoading && activeTab === 'plan' && addToWorkout.length > 0 && (
                         <div className="space-y-3">
-                            {addToWorkout.map((workout) => (
+                            {sortedWorkouts.map((workout) => (
                                 <PlanWorkoutCard
                                     key={workout.id}
                                     workout={workout}
@@ -120,11 +157,10 @@ const MyPlanPage = () => {
                     {/* Saved */}
                     {!isLoading && activeTab === 'saved' && saveForLater.length > 0 && (
                         <div className="space-y-3">
-                            {saveForLater.map((workout) => (
+                            {sortedWorkouts.map((workout) => (
                                 <PlanWorkoutCard
                                     key={workout.id}
                                     workout={workout}
-                                    onAddToPlan={addToPlan}
                                     onRemove={handleRemoveFromSaved}
                                 ></PlanWorkoutCard>
                             ))}

@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import {
-    FaCalendarCheck,
     FaCheck,
     FaFire,
     FaStar,
@@ -14,14 +13,12 @@ import {
 interface PlanWorkoutCardProps {
     workout: ILibrary;
     onMarkAsDone?: (workout: ILibrary) => void;
-    onAddToPlan?: (workout: ILibrary) => void;
     onRemove: (id: number) => void;
 }
 
 const PlanWorkoutCard = ({
     workout,
     onMarkAsDone,
-    onAddToPlan,
     onRemove,
 }: PlanWorkoutCardProps) => {
     return (
@@ -95,18 +92,6 @@ const PlanWorkoutCard = ({
                     >
                         <FaCheck className="text-[10px]" />
                         Mark as Done
-                    </button>
-                )}
-
-                {/* Add to Plan */}
-                {onAddToPlan && (
-                    <button
-                        type="button"
-                        onClick={() => onAddToPlan(workout)}
-                        className="flex cursor-pointer items-center gap-2 rounded-lg bg-[#baff00] px-4 py-2 text-[11px] font-bold text-black transition hover:bg-[#ceff45]"
-                    >
-                        <FaCalendarCheck className="text-[10px]" />
-                        Add to Plan
                     </button>
                 )}
 
