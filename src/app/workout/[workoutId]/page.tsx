@@ -71,12 +71,8 @@ const WorkOutDetailsPage = async ({
         <section className="min-h-screen bg-[#0c0e11] px-4 py-8 text-white sm:px-6 lg:px-8 lg:py-12">
             <div className="mx-auto max-w-7xl">
 
-                {/* Main Workout Container */}
                 <div className="grid overflow-hidden rounded-[20px] border border-[#292d35] bg-[#111317] lg:grid-cols-[1fr_1fr]">
 
-                    {/* =====================================================
-                        LEFT - IMAGE
-                    ====================================================== */}
                     <div className="relative min-h-[400px] lg:min-h-[650px]">
                         <Image
                             src={workout.image}
@@ -87,36 +83,27 @@ const WorkOutDetailsPage = async ({
                             sizes="(max-width: 1024px) 100vw, 50vw"
                         />
 
-                        {/* Image Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
 
-                        {/* Workout ID */}
                         <div className="absolute left-5 top-5 rounded-full border border-white/10 bg-black/40 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-md">
                             Workout #{workout.id}
                         </div>
                     </div>
 
-                    {/* =====================================================
-                        RIGHT - CONTENT
-                    ====================================================== */}
                     <div className="flex flex-col p-6 sm:p-8 lg:p-10">
 
-                        {/* Small Label */}
                         <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#8e949f]">
                             Workout Library
                         </p>
 
-                        {/* Workout Name */}
                         <h1 className="text-[30px] font-black uppercase leading-[1.05] tracking-tight text-white sm:text-[36px]">
                             {workout.name}
                         </h1>
 
-                        {/* Description */}
                         <p className="mt-3 max-w-xl text-[13px] leading-6 text-[#9297a2]">
                             {workout.description}
                         </p>
 
-                        {/* Muscle Groups */}
                         <div className="mt-4 flex flex-wrap gap-2">
                             {workout.muscleGroups.map((muscleGroup) => (
                                 <span
@@ -128,12 +115,8 @@ const WorkOutDetailsPage = async ({
                             ))}
                         </div>
 
-                        {/* =================================================
-                            DETAILS BOX
-                        ================================================== */}
                         <div className="mt-5 overflow-hidden rounded-xl border border-[#292d35] bg-[#171a20]">
 
-                            {/* Equipment */}
                             <div className="flex items-center justify-between border-b border-[#292d35] px-4 py-3">
                                 <div className="flex items-center gap-3">
                                     <FaDumbbell className="text-[11px] text-[#8e949f]" />
@@ -148,7 +131,6 @@ const WorkOutDetailsPage = async ({
                                 </span>
                             </div>
 
-                            {/* Difficulty */}
                             <div className="flex items-center justify-between border-b border-[#292d35] px-4 py-3">
                                 <div className="flex items-center gap-3">
                                     <FaChartBar className="text-[11px] text-[#8e949f]" />
@@ -163,7 +145,6 @@ const WorkOutDetailsPage = async ({
                                 </span>
                             </div>
 
-                            {/* Sets */}
                             <div className="flex items-center justify-between border-b border-[#292d35] px-4 py-3">
                                 <div className="flex items-center gap-3">
                                     <FaLayerGroup className="text-[11px] text-[#8e949f]" />
@@ -178,7 +159,6 @@ const WorkOutDetailsPage = async ({
                                 </span>
                             </div>
 
-                            {/* Reps */}
                             <div className="flex items-center justify-between border-b border-[#292d35] px-4 py-3">
                                 <div className="flex items-center gap-3">
                                     <FaRepeat className="text-[11px] text-[#8e949f]" />
@@ -193,7 +173,6 @@ const WorkOutDetailsPage = async ({
                                 </span>
                             </div>
 
-                            {/* Duration */}
                             <div className="flex items-center justify-between border-b border-[#292d35] px-4 py-3">
                                 <div className="flex items-center gap-3">
                                     <FaStopwatch className="text-[11px] text-[#8e949f]" />
@@ -208,7 +187,6 @@ const WorkOutDetailsPage = async ({
                                 </span>
                             </div>
 
-                            {/* Calories */}
                             <div className="flex items-center justify-between border-b border-[#292d35] px-4 py-3">
                                 <div className="flex items-center gap-3">
                                     <FaFire className="text-[11px] text-[#8e949f]" />
@@ -223,7 +201,6 @@ const WorkOutDetailsPage = async ({
                                 </span>
                             </div>
 
-                            {/* Rating */}
                             <div className="flex items-center justify-between px-4 py-3">
                                 <div className="flex items-center gap-3">
                                     <FaStar className="text-[11px] text-[#8e949f]" />
@@ -240,9 +217,6 @@ const WorkOutDetailsPage = async ({
 
                         </div>
 
-                        {/* =================================================
-                            INSTRUCTIONS
-                        ================================================== */}
                         <div className="mt-6">
 
                             <h2 className="mb-4 text-[11px] font-black uppercase tracking-wide text-white">
@@ -295,9 +269,6 @@ const WorkOutDetailsPage = async ({
 
                         </div>
 
-                        {/* =================================================
-                            ACTION BUTTONS
-                        ================================================== */}
                         <div className="mt-7 flex flex-wrap gap-3">
 
                             <AddToPlanButton workout={workout}></AddToPlanButton>

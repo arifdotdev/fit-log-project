@@ -44,7 +44,6 @@ const WorkOutCard = async ({
             <section className="px-4 py-10 sm:px-6 lg:px-8">
                 <div className="mx-auto  overflow-hidden rounded-[22px] border border-[#292d35] bg-[#15171c] shadow-2xl">
 
-                    {/* Image */}
                     <div className="relative h-[240px] w-full overflow-hidden sm:h-[270px]">
                         {workout && (
                             <Image
@@ -58,10 +57,8 @@ const WorkOutCard = async ({
                         )}
                     </div>
 
-                    {/* Content */}
                     <div className="px-7 pb-7 pt-7">
 
-                        {/* Muscle Groups */}
                         <div className="mb-5 flex flex-wrap gap-2">
                             {workout?.muscleGroups.map((muscleGroup) => (
                                 <span
@@ -73,23 +70,18 @@ const WorkOutCard = async ({
                             ))}
                         </div>
 
-                        {/* Workout Name */}
                         <h1 className="text-[24px] font-extrabold uppercase leading-tight tracking-wide text-white">
                             {workout?.name}
                         </h1>
 
-                        {/* Equipment */}
                         <p className="mt-2 text-[15px] font-medium text-[#9297a2]">
                             {workout?.equipment}
                         </p>
 
-                        {/* Divider */}
                         <div className="my-5 h-px w-full bg-[#292d35]" />
 
-                        {/* Workout Stats */}
                         <div className="flex items-center gap-5 text-[#9297a2]">
 
-                            {/* Duration */}
                             <div className="flex items-center gap-2">
                                 <FaStopwatch className="text-[16px] text-[#a6abb5]" />
                                 <span className="text-[14px] font-medium">
@@ -97,7 +89,6 @@ const WorkOutCard = async ({
                                 </span>
                             </div>
 
-                            {/* Calories */}
                             <div className="flex items-center gap-2">
                                 <FaFire className="text-[16px] text-[#a6abb5]" />
                                 <span className="text-[14px] font-medium">
@@ -105,7 +96,6 @@ const WorkOutCard = async ({
                                 </span>
                             </div>
 
-                            {/* Rating */}
                             <div className="flex items-center gap-2">
                                 <FaStar className="text-[16px] text-[#a6abb5]" />
                                 <span className="text-[14px] font-medium">

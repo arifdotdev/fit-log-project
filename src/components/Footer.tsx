@@ -1,10 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 import logoImg from '@/assets/logo.png';
 
 const Footer = () => {
-    // Year updates automatically every new year
     const year = new Date().getFullYear();
 
     return (
@@ -12,7 +10,6 @@ const Footer = () => {
             <div className="container mx-auto px-1 py-6">
                 <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-between sm:text-left">
 
-                    {/* Left - Logo */}
                     <Link href="/" className="flex items-center gap-2">
                         <Image
                             src={logoImg}
@@ -26,7 +23,6 @@ const Footer = () => {
                         </span>
                     </Link>
 
-                    {/* Right - Tagline */}
                     <p className="text-xs opacity-60">
                         © {year} FitLog — Workout Library. Train hard, log honest.
                     </p>

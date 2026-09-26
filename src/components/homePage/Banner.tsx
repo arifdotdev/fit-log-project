@@ -5,10 +5,8 @@ import bannerImg from '@/assets/banner.png';
 const Banner = () => {
     return (
         <div className="container mx-auto px-4">
-            {/* Stacks on mobile (image below text), side by side from md and up */}
             <div className="my-6 flex w-full flex-col items-center gap-8 overflow-hidden rounded-xl border border-[#252830] bg-[#15171c] px-5 py-8 md:my-10 md:min-h-[420px] md:flex-row md:gap-4 md:px-12 lg:px-10">
 
-                {/* Left Content */}
                 <div className="w-full text-center md:w-1/2 md:text-left">
                     <h4 className="mb-4 text-[11px] font-bold tracking-[0.12em] text-[#c8ff00]">
                         WORKOUT LIBRARY
@@ -27,7 +25,6 @@ const Banner = () => {
                     </button>
                 </div>
 
-                {/* Right Image */}
                 <div className="flex w-full items-center justify-center md:w-1/2">
                     <Image
                         src={bannerImg}

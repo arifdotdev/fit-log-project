@@ -16,14 +16,11 @@ const NavBar = () => {
 
     const { addToWorkout, saveForLater } = workoutContext;
 
-    // Live counts shown on the right side of the navbar
     const planCount = addToWorkout.length;
     const savedCount = saveForLater.length;
 
-    // Current URL path, used to highlight the active link
     const pathname = usePathname();
 
-    // Workouts is active on the home page and on workout detail pages
     const isWorkoutsActive = pathname === '/' || pathname.startsWith('/workout');
     const isMyPlanActive = pathname.startsWith('/my-plan');
 
@@ -55,7 +52,6 @@ const NavBar = () => {
             <div className="container mx-auto 0 px-1 py-1">
                 <nav className="navbar min-h-[70px] ">
 
-                    {/* Left - Logo */}
                     <div className="navbar-start">
                         <div className="dropdown">
                             <div
@@ -102,18 +98,15 @@ const NavBar = () => {
                         </Link>
                     </div>
 
-                    {/* Center - Navigation */}
                     <div className="navbar-center hidden lg:flex">
                         <div className="flex items-center gap-1">
                             {links}
                         </div>
                     </div>
 
-                    {/* Right */}
                     <div className="navbar-end">
                         <div className="flex items-center gap-6 text-sm">
 
-                            {/* Both counters link to the My Plan page; Saved opens the Saved tab */}
                             <Link
                                 href="/my-plan"
                                 className="flex items-center gap-2 transition hover:opacity-100"

@@ -15,7 +15,6 @@ const PlanStats = ({ workouts }: { workouts: ILibrary[] }) => {
     return (
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
 
-            {/* Exercises */}
             <div className="rounded-xl border border-[#292d35] bg-[#15171c] px-6 py-5">
                 <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#9297a2]">
                     Exercises
@@ -26,7 +25,6 @@ const PlanStats = ({ workouts }: { workouts: ILibrary[] }) => {
                 </p>
             </div>
 
-            {/* Minutes */}
             <div className="rounded-xl border border-[#292d35] bg-[#15171c] px-6 py-5">
                 <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#9297a2]">
                     Minutes
@@ -37,7 +35,6 @@ const PlanStats = ({ workouts }: { workouts: ILibrary[] }) => {
                 </p>
             </div>
 
-            {/* Calories */}
             <div className="rounded-xl border border-[#292d35] bg-[#15171c] px-6 py-5">
                 <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#9297a2]">
                     Calories

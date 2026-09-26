@@ -27,14 +27,11 @@ const MyPlanPage = () => {
         isLoading,
     } = workoutContext;
 
-    // Start on the Saved tab when the URL is /my-plan?tab=saved (used by the navbar link)
     const searchParams = useSearchParams();
     const startTab = searchParams.get('tab') === 'saved' ? 'saved' : 'plan';
 
     const [activeTab, setActiveTab] = useState<'plan' | 'saved'>(startTab);
 
-    // If the URL changes while already on this page (e.g. clicking "Saved" in the navbar),
-    // switch the tab to match it
     useEffect(() => {
         setActiveTab(startTab);
     }, [startTab]);
@@ -56,11 +53,8 @@ const MyPlanPage = () => {
         setSaveForLater((prev) => prev.filter((item) => item.id !== id));
     };
 
-    // The list shown under the active tab
     const workouts = activeTab === 'plan' ? addToWorkout : saveForLater;
 
-    // Sort a copy so the original list is not changed.
-    // Duration: shortest first. Calories & Rating: highest first.
     const sortedWorkouts = [...workouts].sort((a, b) => {
         if (sortBy === 'duration') return a.duration - b.duration;
         if (sortBy === 'calories') return b.caloriesBurned - a.caloriesBurned;
@@ -71,22 +65,18 @@ const MyPlanPage = () => {
         <section className="min-h-screen bg-[#0c0e11] text-white">
             <div className="container mx-auto px-4 py-10">
 
-                {/* Header */}
                 <h1 className="text-3xl font-bold uppercase">MY PLAN</h1>
 
                 <p className="mt-1 text-sm text-[#9297a2]">
                     Cap of five lifts for today. Finish them, then load more.
                 </p>
 
-                {/* Metrics Summary */}
                 <div className="mt-6">
                     <PlanStats workouts={workouts}></PlanStats>
                 </div>
 
-                {/* Tabs + Sort */}
                 <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
 
-                {/* Tabs */}
                 <div className="inline-flex rounded-full border border-[#292d35] bg-[#15171c] p-1">
                     <button
                         type="button"
@@ -113,7 +103,6 @@ const MyPlanPage = () => {
                     </button>
                 </div>
 
-                {/* Sort Dropdown */}
                 <div className="flex items-center gap-2">
                     <span className="text-[11px] font-bold uppercase text-[#9297a2]">
                         Sort By
@@ -136,22 +125,18 @@ const MyPlanPage = () => {
 
                 </div>
 
-                {/* Workout List */}
                 <div className="mt-5">
 
-                    {/* Loading State */}
                     {isLoading && (
                         <p className="py-10 text-center text-sm text-[#9297a2]">
                             Loading workouts…
                         </p>
                     )}
 
-                    {/* Empty State */}
                     {!isLoading && workouts.length === 0 && (
                         <EmptyPlan></EmptyPlan>
                     )}
 
-                    {/* Today's Plan */}
                     {!isLoading && activeTab === 'plan' && addToWorkout.length > 0 && (
                         <div className="space-y-3">
                             {sortedWorkouts.map((workout) => (
@@ -165,7 +150,6 @@ const MyPlanPage = () => {
                         </div>
                     )}
 
-                    {/* Saved */}
                     {!isLoading && activeTab === 'saved' && saveForLater.length > 0 && (
                         <div className="space-y-3">
                             {sortedWorkouts.map((workout) => (
@@ -184,7 +168,6 @@ const MyPlanPage = () => {
     );
 };
 
-// useSearchParams needs a Suspense boundary around it in Next.js
 const MyPlanPageWithSuspense = () => (
     <Suspense>
         <MyPlanPage />

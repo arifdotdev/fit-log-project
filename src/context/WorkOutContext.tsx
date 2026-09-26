@@ -9,7 +9,6 @@ import {
 } from 'react';
 import { toast } from 'react-toastify';
 
-// Max number of lifts allowed in today's plan
 const PLAN_LIMIT = 5;
 
 interface WorkoutContextType {
@@ -29,8 +28,6 @@ const WorkoutProvider = ({ children }: { children: ReactNode }) => {
     const [saveForLater, setSaveForLater] = useState<ILibrary[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    // Load the lists from localStorage when the app starts.
-    // This runs once after hydration so the server and client render the same HTML.
     /* eslint-disable react-hooks/set-state-in-effect */
     useEffect(() => {
         const storedPlan = localStorage.getItem('fitlog-plan');
@@ -48,7 +45,6 @@ const WorkoutProvider = ({ children }: { children: ReactNode }) => {
     }, []);
     /* eslint-enable react-hooks/set-state-in-effect */
 
-    // Keep localStorage in sync whenever the lists change
     useEffect(() => {
         if (isLoading) return;
 
@@ -57,13 +53,11 @@ const WorkoutProvider = ({ children }: { children: ReactNode }) => {
     }, [addToWorkout, saveForLater, isLoading]);
 
     const addToPlan = (workout: ILibrary) => {
-        // Prevent duplicate workout
         if (addToWorkout.some((item) => item.id === workout.id)) {
             toast.info('Workout is already in your plan!');
             return;
         }
 
-        // Cap of five lifts for today
         if (addToWorkout.length >= PLAN_LIMIT) {
             toast.warn("Today's plan is full. Finish a lift, then load more!");
             return;
@@ -74,7 +68,6 @@ const WorkoutProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const saveWorkout = (workout: ILibrary) => {
-        // Prevent duplicate workout
         if (saveForLater.some((item) => item.id === workout.id)) {
             toast.info('Workout is already saved!');
             return;
